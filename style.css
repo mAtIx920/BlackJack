@@ -1,0 +1,214 @@
+body {
+	height: 100vh;
+	width: 100vw;
+	position: relative;
+	margin: 0;
+	font-family: 'Bitter', serif;
+}
+
+h1 {
+	text-align: center;
+	font-weight: 800;
+}
+
+h2 {
+	font-size: 1.2em;
+	display: block;
+	width: 100%;
+	color: #fff;
+	border-bottom: 3px #fff solid;
+	padding-bottom: 5px;
+}
+
+.points {
+	text-align: center;
+	border-top: 3px black solid;
+	border-bottom: 3px black solid;
+	padding: 10px 0px;
+}
+
+.points div {
+	padding-top: 5px;
+	font-weight: bold;
+	font-size: 1.5em;
+}
+
+.blackJack {
+	width: 800px;
+	margin: 20px auto;
+	position: relative;
+}
+
+.table {
+	max-width: 40vw;
+	background-color: green;
+	padding: 100px;
+	border-radius: 100px;
+	border: 3px black solid;
+	margin: 50px auto;
+}
+
+.playerCards,
+.dealerCards {
+	display: flex;
+	margin-bottom: 30px;
+	min-height: 110px;
+}
+
+.card {
+	position: relative;
+	background: #fff;
+	width: 50px;
+	padding: 40px 20px;
+	font-weight: bold;
+	margin-right: 20px;
+	box-shadow: 0.2em 0.2em 0.5em #333;
+}
+
+.card span {
+	position: absolute;
+	font-size: 17px;
+}
+
+.card span:nth-of-type(1) {
+	top: 5%;
+	left: 10%;
+}
+
+.card span:nth-of-type(2) {
+	top: 5%;
+	right: 10%;
+}
+
+.card span:nth-of-type(3) {
+	bottom:5%;
+	left: 10%;
+}
+
+.card span:nth-of-type(4) {
+	bottom: 5%;
+	right: 10%;
+}
+
+.hearts,
+.diamonds {
+	color: #ff0000;
+}
+
+.spades,
+.clubs {
+	color: #000;
+}
+
+.message {
+	z-index: 9999;
+	position: absolute;
+	top: 300px;
+	width: 100%;
+	padding: 50px 0;
+	background-color: rgba(255, 255, 255, 0.85);
+	font-size: 3.5em;
+	font-weight: bold;
+	text-align: center;
+	-webkit-box-shadow: -1px 14px 73px -22px rgba(0, 0, 0, 0.56);
+	-moz-box-shadow: -1px 14px 73px -22px rgba(0, 0, 0, 0.56);
+	box-shadow: -1px 14px 73px -22px rgba(0, 0, 0, 0.56);
+}
+
+.buttons {
+	padding-top: 50px;
+	text-align: center;
+}
+.buttons button {
+	padding: 10px 30px;
+	border-radius: 30px;
+	background: #000;
+	color: #fff;
+	margin: 0 50px;
+}
+
+.contener {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	backdrop-filter: blur(2px);
+}
+
+.bet {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+	width: 30%;
+	height: 35%;
+	border-radius: 20px;
+	background-color: rgba(0, 0, 0, .3);
+	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7), -1px -1px 3px rgba(0, 0, 0, 0.7);
+}
+
+.bet label {
+	text-align: center;
+	height: 40%;
+}
+
+.bet label p {
+	margin: 0;
+	font-size: 20px;
+	font-weight: bold;
+	color: white;
+}
+
+.bet label input {
+	width: 45%;
+	font-size: 35px;
+	padding: 5px 5px;
+	border: 1px solid black;
+	border-radius: 10px;
+	outline: none;
+	text-align: center;
+}
+
+.bet label input::placeholder {
+	font-size: 15px;
+}
+
+.bet label .playerCash {
+	margin-top: 3px;
+	font-size: 15px;
+	color: red;
+}
+
+.bet button {
+	font-size: 30px;
+	margin-top: 30px;
+	padding: 5px 30px;
+	border-radius: 10px;
+	background-color: rgba(0, 0, 0);
+	color: white;
+	cursor: pointer;
+	box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.3);
+	transition: 0.1s;
+}
+
+.bet button:hover {
+	background-color: #333;
+}
+
+.bet .text {
+	width: 100%;
+	height: 10%;
+	margin-bottom: 20px;
+	text-align: center;
+	color: white;
+	font-size: 13px;
+}
+
+.hide {
+	display: none;
+}

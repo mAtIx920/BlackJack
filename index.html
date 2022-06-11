@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bitter&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <title>BlackJack</title>
+</head>
+<body>
+  <img src="./assets/" alt="">
+  <section class="blackjack">
+    <header>
+      <h1>BlackJack</h1>
+    </header>
+    <div class="table">
+      <h2>Your cards</h2>
+      <div class="playerCards"></div>
+      <h2>Dealer cards</h2>
+      <div class="dealerCards"></div>
+    </div>
+    <div class="points">
+      Points's player <div class="plyerPoints"></div>
+      Points's dealer <div class="dealerPoints"></div>
+    </div>
+    <div class="buttons">
+      <button class="hit">Hit</button>
+      <button class="stand">Stand</button>
+    </div>
+    <div class="message hide" data-message></div>
+  </section>
+  <div class="contener" data-bet>
+    <div class="bet">
+      <label>
+        <p>Your bet</p>
+        <input type="number" placeholder="Type primary bet" data-betInput>
+        <p class="playerCash">Money in your wallet - <span data-playerCash></span>zł</p>
+      </label>
+      <button data-betButton>PLAY</button>
+      <div class="text"></div>
+    </div>
+  </div>
+  <script src="Components/Game.js" type="module"></script>
+</body>
+</html>
