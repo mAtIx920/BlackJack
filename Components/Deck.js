@@ -37,7 +37,11 @@ class Deck {
     }
 
     this.cards = tab;
-    console.log(this.cards)
+  }
+
+  getOneCard = () => {
+    const card = this.cards.pop();
+    return card;
   }
 }
 

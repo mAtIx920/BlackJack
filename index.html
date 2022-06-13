@@ -18,13 +18,17 @@
     </header>
     <div class="table">
       <h2>Your cards</h2>
-      <div class="playerCards"></div>
+      <div class="playerCards" data-playerCards></div>
       <h2>Dealer cards</h2>
-      <div class="dealerCards"></div>
+      <div class="dealerCards" data-dealerCards></div>
     </div>
-    <div class="points">
-      Points's player <div class="plyerPoints"></div>
-      Points's dealer <div class="dealerPoints"></div>
+    <div class="game__info">
+      <div class="game__bet" data-gameBetInfo></div>
+      <div class="points">
+        Points's player <div class="playerPoints" data-playerPoints></div>
+        Points's dealer <div class="dealerPoints" data-dealerPoints></div>
+      </div>
+      <div class="multiplier" data-multiplier></div>
     </div>
     <div class="buttons">
       <button class="hit">Hit</button>
@@ -32,7 +36,7 @@
     </div>
     <div class="message hide" data-message></div>
   </section>
-  <div class="contener" data-bet>
+  <div class="modal" data-bet>
     <div class="bet">
       <label>
         <p>Your bet</p>
