@@ -10,7 +10,13 @@ export class UI {
     betPlayerCash: '[data-playerCash]',
     betInput: '[data-betInput]',
     betButton: '[data-betButton]',
-    messageModal: '[data-message]'
+    messageModal: '[data-message]',
+    playerCards: '[data-playerCards]',
+    dealerCards: '[data-dealerCards]',
+    gameBetInfo: '[data-gameBetInfo]',
+    playerPoints: '[data-playerPoints]',
+    dealerPoints: '[data-dealerPoints]',
+    multiplier: '[data-multiplier]'
   }
 
   getElement = elementSelector => {
@@ -25,13 +31,14 @@ export class UI {
     const parentElement = document.querySelector(parentSelector);
 
     const childElement = document.createElement(childSelector);
-    childElement.textContent = text
+    childElement.textContent = text;
     parentElement.appendChild(childElement);
   }
 
+  //Function answering for change modal messages
   changeScreen = (element, mode) => {
     mode === this.serviceScreenType.VISIBLED
       ? element.classList.remove(this.serviceScreenType.HIDDENCLASS)
-    : element.classList.add(this.serviceScreenType.HIDDENCLASS)
+    : element.classList.add(this.serviceScreenType.HIDDENCLASS);
   }
 }
