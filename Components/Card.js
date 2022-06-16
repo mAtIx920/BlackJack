@@ -69,9 +69,7 @@ export class Card {
 
       icon.setAttribute('src', `./assets/${this.typeCard}.png`);
     } 
-
-    this.checkNumber = checkNumber++;
-   
+  
     contener.setAttribute('class', 'contener');
     card.setAttribute('class', `card ${this.typeCard}`);
     frontCard.setAttribute('class', 'frontCard');
@@ -81,6 +79,10 @@ export class Card {
     card.appendChild(frontCard)
     card.appendChild(backCard);
 
+    this.checkNumber = checkNumber++;
+
+    card.dataset.number = this.checkNumber;
+
     card.addEventListener('click', () => this.reverseCard(this.checkNumber))
 
     return contener
@@ -89,8 +91,8 @@ export class Card {
   reverseCard = cardNumber => {
     const cards = document.querySelectorAll('.table div div.card');
 
-    cards.forEach((card, index) => {
-      if(index === cardNumber) {
+    cards.forEach(card => {
+      if(card.getAttribute('data-number') == cardNumber) {
         const tabClassList = card.getAttribute('class').split(' ');
       
         if(tabClassList.includes('reverse')) return;
