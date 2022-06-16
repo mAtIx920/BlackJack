@@ -21,6 +21,10 @@ h2 {
 	padding-bottom: 5px;
 }
 
+button {
+	cursor: pointer;
+}
+
 .game__info {
 	display: flex;
 	justify-content: space-around;
@@ -130,7 +134,7 @@ h2 {
   color:#FFF;
   background-color:#000;
 	background-image: url("./assets/cardBackground.jpg");
-	background-size: contain;
+	background-size: cover;
   transform:rotateY(180deg);
   backface-visibility:hidden;
 }
@@ -227,8 +231,8 @@ h2 {
 	flex-direction: column;
 	justify-content: space-around;
 	align-items: center;
-	width: 30%;
-	height: 35%;
+	width: 20%;
+	height: 30%;
 	border-radius: 20px;
 	background-color: rgba(0, 0, 0, .3);
 	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7), -1px -1px 3px rgba(0, 0, 0, 0.7);
@@ -254,6 +258,10 @@ h2 {
 	border-radius: 10px;
 	outline: none;
 	text-align: center;
+}
+
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
 }
 
 .bet label input::placeholder {
@@ -289,6 +297,83 @@ h2 {
 	text-align: center;
 	color: white;
 	font-size: 13px;
+}
+
+.end {
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+	width: 40%;
+	height: 50%;
+	border-radius: 20px;
+	background-color: rgba(0, 0, 0, .3);
+	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7), -1px -1px 3px rgba(0, 0, 0, 0.7);
+}
+
+.end h1 {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 30%;
+	margin: 0;
+	font-size: 50px;
+	letter-spacing: 7px;
+	color: white;
+}
+
+.end .info {
+	display: flex;
+	width: 100%;
+	height: 30%;
+	border-top: 1px solid white;
+	border-bottom: 1px solid white;
+}
+
+.end .info .bet__info, .multiplier__info {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	color: white;
+	width: 50%;
+	height: 100%;
+	font-size: 17px;
+}
+
+.end .text {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 15%;
+	font-size: 20px;
+	letter-spacing: 2px;
+	font-weight: bold;
+	color: red;
+}
+
+.end .buttonContener {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 25%;
+}
+
+.end .buttonContener button {
+	font-size: 30px;
+	padding: 5px 30px;
+	border-radius: 10px;
+	background-color: rgba(0, 0, 0);
+	color: white;
+	cursor: pointer;
+	box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.3);
+	transition: 0.1s;
+}
+
+.end .buttonContener button:hover {
+	background-color: #333;
 }
 
 .hide {
