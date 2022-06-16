@@ -5,6 +5,7 @@ export class UI {
     HIDDEN: false
   }
 
+  //Here are all selectors DOM elements
   selectors = {
     betModal: '[data-bet]',
     betPlayerCash: '[data-playerCash]',
@@ -16,17 +17,25 @@ export class UI {
     gameBetInfo: '[data-gameBetInfo]',
     playerPoints: '[data-playerPoints]',
     dealerPoints: '[data-dealerPoints]',
-    multiplier: '[data-multiplier]'
+    multiplier: '[data-multiplier]',
+    buttons: '[data-buttons]',
+    endModal: '[data-end]',
+    endHeader: '[data-end-header]',
+    betInfo: '[data-betInfo]',
+    multiplierInfo: '[data-multiplierInfo]',
+    textInfo: '[data-textInfo]'
   }
 
+  //Function allowing get DOM elements to js
   getElement = elementSelector => {
     const element = document.querySelector(elementSelector);
     
-    if(!element) throw new Error(`Element ${elementSelector} was not found :(`);
+    if(!element) throw new Error(`Element ${elementSelector} was not found :(`); //Checking if DOM element exists
 
     return element;
   }
 
+  //Function creating new element in DOM
   createElement = (parentSelector, childSelector, text = null) => {
     const parentElement = document.querySelector(parentSelector);
 
@@ -35,7 +44,18 @@ export class UI {
     parentElement.appendChild(childElement);
   }
 
-  //Function answering for change modal messages
+  //Function creating buttons
+  createButton = (text, classElement) => {
+    if(!text.length || !classElement.length) new Error('Text must be type in button element');
+
+    const button = document.createElement('button');
+    button.textContent = text;
+    button.classList.add(classElement);
+
+    return button;
+  }
+
+  //Function answering for changing modal messages
   changeScreen = (element, mode) => {
     mode === this.serviceScreenType.VISIBLED
       ? element.classList.remove(this.serviceScreenType.HIDDENCLASS)
