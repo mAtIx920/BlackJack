@@ -8,8 +8,8 @@ class Player extends Wallet {
     this.currentCards = [];
     this.playerPoints = null;
 
-    this.getBet = () => this.playerBet;
-    this.takeCard = card => this.currentCards.push(card);
+    this.getBet = () => this.playerBet; //Function getting player bet
+    this.takeCard = card => this.currentCards.push(card); //Function putting new card to the player deck
   }
 
   //Function which counts player points
@@ -21,6 +21,19 @@ class Player extends Wallet {
       amountAll += card.valueCard;
     })
 
+    if(amountAll > 21) { 
+      amountAll = null;
+
+      cards.forEach(card => { //Checking if player deck owns AS card, if it is true, value of AS card will change at one point
+        if(card.nameCard === 'a') {
+          card.valueCard = 1;
+        }
+
+        amountAll += card.valueCard;
+      })
+    }
+
+    this.playerPoints = amountAll;
     return amountAll;
   }
   
