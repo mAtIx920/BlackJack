@@ -30,7 +30,11 @@
       </div>
       <div class="multiplier" data-multiplier></div>
     </div>
-    <div class="buttons" data-buttons></div>
+    <div class="buttonsWrapper">
+      <div class="buttonContener" data-hitContener></div>
+      <div class="buttonContener" data-extendContener></div>
+      <div class="buttonContener" data-standContener></div>
+    </div>
     <div class="message hide" data-message></div>
   </section>
   <div class="modal" data-bet>
@@ -44,19 +48,30 @@
       <div class="text"></div>
     </div>
   </div>
+
   <div class="modal hide" data-end>
     <div class="end">
       <h1 data-end-header></h1>
       <div class="info">
-        <div class="bet__info" data-betInfo></div>
-        <div class="multiplier__info" data-multiplierInfo></div>
+        <div class="bet__info">
+          <p>Your bet in game : <span data-betInfo></span></p>
+          <p>Your points : <span data-playerPointsInfo></span></p>
+        </div>
+        <div class="multiplier__info">
+          <p>Multiplier amount : <span data-multiplierInfo></span>%</p>
+          <p>Dealer points : <span data-dealerPointsInfo></span></p>
+        </div>
       </div>
-      <div class="text" data-textInfo></div>
-      <div class="buttonContener">
+      <div class="text">
+        <p data-textInfo></p>
+      </div>
+      <div class="buttonEndContener">
         <button data-playAgain>PLAY AGAIN</button>
+        <button data-back>BACK</button>
       </div>
     </div>
   </div>
+  
   <script src="Components/Game.js" type="module"></script>
 </body>
 </html>
