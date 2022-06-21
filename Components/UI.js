@@ -18,12 +18,20 @@ export class UI {
     playerPoints: '[data-playerPoints]',
     dealerPoints: '[data-dealerPoints]',
     multiplier: '[data-multiplier]',
-    buttons: '[data-buttons]',
+    //Contener of buttons elements
+    hitContener: '[data-hitContener]',
+    extendContener: '[data-extendContener]',
+    standContener: '[data-standContener]',
+    //End modal elements
     endModal: '[data-end]',
     endHeader: '[data-end-header]',
     betInfo: '[data-betInfo]',
+    playerPointsInfo: '[data-playerPointsInfo]',
     multiplierInfo: '[data-multiplierInfo]',
-    textInfo: '[data-textInfo]'
+    dealerPointsInfo: '[data-dealerPointsInfo]',
+    textInfo: '[data-textInfo]',
+    againButton: '[data-playAgain]',
+    backButton: '[data-back]'
   }
 
   //Function allowing get DOM elements to js
@@ -45,12 +53,12 @@ export class UI {
   }
 
   //Function creating buttons
-  createButton = (text, classElement) => {
-    if(!text.length || !classElement.length) new Error('Text must be type in button element');
+  createButton = (text, classText) => {
+    if(!text.length || !classText.length) new Error('Text must be type in button element');
 
     const button = document.createElement('button');
     button.textContent = text;
-    button.classList.add(classElement);
+    button.classList.add(classText);
 
     return button;
   }
