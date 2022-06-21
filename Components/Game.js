@@ -8,7 +8,7 @@ import { message} from "./Message.js";
 class Game extends UI {
   constructor() {
     super();
-    this.buttons = new Buttons(this.hitAction, this.standAction)
+    this.buttons = new Buttons(this.hitAction, this.doubleAction, this.standAction, this.insuranceAction)
     modal.playerCashSpan.textContent = player.getPlayerCash;
     this.createElementEvents();
     this.dealerCards = [];
@@ -21,13 +21,15 @@ class Game extends UI {
   #multiplier = 100;
   #isfinishedGame = false;
   #playerWon = 0;
+  #useDouble = false;
+  #useInsurance = false;
 
   //Adding listener event on buttons
   createElementEvents = () => {
-    modal.betButton.addEventListener('click', () => this.startGame());
+    modal.betButton.addEventListener('click', (e) => this.startGame());
   }
 
-  startGame = () => {
+  startGame = (e) => {
     //Checking amount of input if input is empty or not
     const bet = modal.betInput.value;
     if(this.#textError) document.querySelector('.text p').remove();
@@ -138,6 +140,20 @@ class Game extends UI {
     this.getElement('.playerPoints p').textContent = player.playerPointsOperation();
   }
 
+  doubleAction = () => {
+    this.#useDouble = true;
+    this.hitAction();
+    this.buttons.removeListeners();
+    message.createMessage('You have just used double hit mode');
+    this.changeScreen(modal.messageModal, this.serviceScreenType.VISIBLED);
+
+    setTimeout(() => {
+      this.changeScreen(modal.messageModal, this.serviceScreenType.HIDDEN);
+      this.standAction();
+    }, 2000)
+   
+  }
+
   standAction = () => {
     const maxDealerPoints = 17 //Dealer cards value under which dealer can pick another card
     this.#isfinishedGame = true;
@@ -182,10 +198,35 @@ class Game extends UI {
       }
     }
 
+    if(this.#useInsurance || this.#useDouble) {
+      this.#multiplier = 200;
+
+      if(this.#useInsurance && this.dealerCards[1].valueCard !== 10) {
+        this.#multiplier = 100;
+      }
+
+      if(this.#playerWon === 2 && this.#useDouble) {
+        this.#multiplier = 100;
+      }
+    }
+
     message.createMessage('Dealer are picking his card, please wait'); //Creating message
     this.changeScreen(modal.messageModal, this.serviceScreenType.VISIBLED);// Displaying message on the screen
 
     this.endGame();
+  }
+
+  insuranceAction = () => {
+    this.#useInsurance = true;
+    player.playerCash -= (player.playerBet / 2);
+    message.createMessage('You have just used insurance mode');
+    this.changeScreen(modal.messageModal, this.serviceScreenType.VISIBLED);
+
+    this.buttons.insuranceButton.removeEventListener('click', this.insuranceAction);
+    this.buttons.insuranceButton.classList.add('usedButton');
+
+    setTimeout(() => this.changeScreen(modal.messageModal, this.serviceScreenType.HIDDEN), 2000);
+    console.log(player.playerCash)
   }
 
   checkGame = () => {
@@ -213,6 +254,10 @@ class Game extends UI {
       this.#multiplier = 150;
       this.dealerPointsOperation();
       this.endGame();
+
+    } else if(dealerCards[0].nameCard === 'a') {
+      this.buttons.insuranceButton.textContent = `INSURANCE - ${player.playerBet / 2}zł`
+      this.getElement(this.selectors.extendContener).appendChild(this.buttons.insuranceButton);
     }
   }
 
@@ -227,7 +272,7 @@ class Game extends UI {
         this.getElement(`${this.selectors.multiplier} p:nth-of-type(2)`).textContent = `${this.#multiplier}%`;
         this.getElement(`${this.selectors.dealerPoints} p`).textContent = `${this.dealerPoints}`;
         this.changeScreen(modal.messageModal, this.serviceScreenType.HIDDEN);
-        this.changeScreen(modal.endModal, this.serviceScreenType.VISIBLED);
+       
 
         //Display dealer cards on the screen
         this.dealerCards.forEach((card, index) => {
@@ -238,23 +283,30 @@ class Game extends UI {
         });
 
         //Checking if player won, lost or drawn the game
+        const textElement = this.getElement(this.selectors.textInfo);
         if(this.#playerWon === 1) {
           modal.headerElement.textContent = 'YOU WON THE GAME';
-          this.createElement(this.selectors.textInfo, 'p', `You have won ${wonCash}zł`);
+          textElement.textContent = `You have won ${wonCash}zł`;
 
         } else if(this.#playerWon === 2) {
           modal.headerElement.textContent = 'YOU DRAWN THE GAME';
-          this.createElement(this.selectors.textInfo, 'p', `You have received the recovery your bet`);
+          textElement.textContent = `You have received the recovery your bet`;
 
         } else {
           modal.headerElement.textContent = 'YOU LOST THE GAME';
-          this.createElement(this.selectors.textInfo, 'p', `You have lost ${wonCash}zł`);
+          textElement.textContent = `You have lost ${wonCash}zł`;
         }
 
-        this.createElement(this.selectors.betInfo, 'p', `Your bet in game : ${playerBet}`);
-        this.createElement(this.selectors.betInfo, 'p', `Your points : ${playerPoints}`);
-        this.createElement(this.selectors.multiplierInfo, 'p', `Multiplier amount : ${this.#multiplier}%`);
-        this.createElement(this.selectors.multiplierInfo, 'p', `Dealer points : ${dealerPoints}`);
+        if(this.#useInsurance && this.dealerCards[1].valueCard === 10) {
+          modal.headerElement.textContent = 'YOU WON THE GAME';
+          textElement.textContent = `You have won ${wonCash}zł`;
+        }
+
+        this.getElement(this.selectors.betInfo).textContent = playerBet;
+        this.getElement(this.selectors.playerPointsInfo).textContent = playerPoints;
+        this.getElement(this.selectors.multiplierInfo).textContent = this.#multiplier;
+        this.getElement(this.selectors.dealerPointsInfo).textContent = dealerPoints;
+        this.changeScreen(modal.endModal, this.serviceScreenType.VISIBLED);
 
         this.revealCards();
       }, 3000);
