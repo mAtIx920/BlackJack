@@ -413,6 +413,7 @@ class Game extends UI {
     if(playerCards[0].valueCard === 10 && playerCards[1].valueCard === 11 || playerCards[0].valueCard === 11 && playerCards[1].valueCard === 10) {
 
       this.#isfinishedGame = true;
+      this.#playerWon = 1;
       this.points = 'BLACKJACK';
       message.createMessage('BLACKJACK'); //Set new message modal
       this.changeScreen(modal.messageModal, this.serviceScreenType.VISIBLED); //Display message modal
@@ -434,8 +435,8 @@ class Game extends UI {
     
     //Checking if dealer first card is AS card, if it is true, then player could use insurance mode
     if(dealerCards[0].nameCard === 'a') {
-      this.button = `INSURANCE - ${player.playerBet / 2}zł`;//Displaying price of insurance mode
-      this.getElement(this.selectors.extendCons.insuranceButton.textContenttener).appendChild(this.buttons.insuranceButton);//Added insurance button mode to DOM
+      this.button.textContent = `INSURANCE - ${player.playerBet / 2}zł`;//Displaying price of insurance mode
+      this.getElement(this.selectors.extendContener).appendChild(this.buttons.insuranceButton);//Added insurance button mode to DOM
     }
 
     if(player.currentCards[0].valueCard === player.currentCards[1].valueCard) {
@@ -452,6 +453,8 @@ class Game extends UI {
       const wonCash = playerBet * (this.#multiplier / 100);
       const playerPoints = this.points;
       const dealerPoints = this.dealerPoints;
+
+      let cashToSend = 0;
 
       setTimeout(() => {
         this.getElement(`${this.selectors.multiplier} p:nth-of-type(2)`).textContent = `${this.#multiplier}%`;
@@ -472,19 +475,26 @@ class Game extends UI {
         if(this.#playerWon === 1) {
           modal.headerElement.textContent = 'YOU WON THE GAME';
           textElement.textContent = `You have won ${wonCash}zł`;
+          cashToSend = wonCash + playerBet;
 
         } else if(this.#playerWon === 2) {
           modal.headerElement.textContent = 'YOU DRAWN THE GAME';
           textElement.textContent = `You have received the recovery your bet`;
+          cashToSend = playerBet;
 
         } else {
           modal.headerElement.textContent = 'YOU LOST THE GAME';
           textElement.textContent = `You have lost ${wonCash}zł`;
+
+          if(this.#multiplier === 200) {
+            cashToSend = -(playerBet);
+          }
         }
 
         if(this.#useInsurance && this.dealerCards[1].valueCard === 10) {
           modal.headerElement.textContent = 'YOU WON THE GAME';
           textElement.textContent = `You have won ${wonCash}zł`;
+          cashToSend = wonCash + playerBet
         }
 
         this.getElement(this.selectors.betInfo).textContent = playerBet;
@@ -494,6 +504,9 @@ class Game extends UI {
         this.changeScreen(modal.endModal, this.serviceScreenType.VISIBLED);
 
         this.revealCards();
+
+        cashToSend += player.playerCash;
+        
       }, 3000);
     }
   }
