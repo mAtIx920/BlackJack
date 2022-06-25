@@ -79,11 +79,10 @@ button {
 }
 
 .table {
-	max-width: 40vw;
+	max-width: 60vw;
 	background-image: url("./assets/tableBackground.jpg");
 	background-position: 50% 50%;
 	background-size: cover;
-	/* background-color: green; */
 	padding: 65px 100px 65px 100px;
 	border-radius: 100px;
 	border: 3px goldenrod solid;
@@ -92,9 +91,40 @@ button {
 
 .playerCards,
 .dealerCards {
+	position: relative;
 	display: flex;
+	justify-content: center;
+	align-items: center;
 	margin-bottom: 30px;
 	min-height: 110px;
+}
+
+.playerCards .boxOne__points {
+	position: absolute;
+	left: 0;
+	transform: translateX(-125%);
+	text-align: center;
+	color: white;
+	font-weight: bold;
+	font-size: 17px;
+}
+
+.playerCards .boxTwo__points {
+	position: absolute;
+	right: 0;
+	transform: translateX(125%);
+	text-align: center;
+	color: white;
+	font-weight: bold;
+	font-size: 17px;
+}
+
+.playerCards .boxOne__points p {
+	margin: 3px 0;
+}
+
+.playerCards .boxTwo__points p {
+	margin: 3px 0;
 }
 
 .contener {
@@ -220,7 +250,7 @@ button {
 .buttonContener button {
 	padding: 10px 30px;
 	border-radius: 30px;
-	background: #aaa;
+	background: #eee;
 	border: 2px solid darkred;
 	color: #000;
 	font-weight: bold;
@@ -402,6 +432,21 @@ input[type=number]::-webkit-inner-spin-button {
 
 .end .buttonEndContener button:hover {
 	background-color: #333;
+}
+
+.playerCards .box__one,.box__two {
+	width: 50%;
+	padding: 0 7px;
+	height: 100%;
+	display: flex;
+}
+
+.playerCards .box__one {
+	border-right: 1px solid white;
+}
+
+.playerCards .box__two {
+	border-left: 1px solid white;
 }
 
 .buttonContener .usedButton {
