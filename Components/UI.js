@@ -31,7 +31,12 @@ export class UI {
     dealerPointsInfo: '[data-dealerPointsInfo]',
     textInfo: '[data-textInfo]',
     againButton: '[data-playAgain]',
-    backButton: '[data-back]'
+    backButton: '[data-back]',
+    //Two boxes with points elements
+    // firstBoxElement: '.boxOne__points',
+    // secondBoxElement: '.boxTwo__points',
+    // firstBoxPoints: '[data-boxOnePoints]',
+    // secondBoxPoints: '[data-boxTwoPoints]'
   }
 
   //Function allowing get DOM elements to js
@@ -44,12 +49,16 @@ export class UI {
   }
 
   //Function creating new element in DOM
-  createElement = (parentSelector, childSelector, text = null) => {
+  createElement = (parentSelector, childSelector, text = null, classText = null) => {
     const parentElement = document.querySelector(parentSelector);
 
     const childElement = document.createElement(childSelector);
+    childElement.classList.add(classText);
     childElement.textContent = text;
+
     parentElement.appendChild(childElement);
+
+    return childElement;
   }
 
   //Function creating buttons
