@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "start": "http-server --port 5000",
+    "server": "json-server --watch money.json"
+  },
+  "dependencies": {
+    "http-server": "^14.1.1",
+    "json-server": "^0.17.0"
+  }
+}
