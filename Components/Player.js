@@ -1,10 +1,9 @@
 import { Wallet } from "./Wallet.js";
 
-class Player extends Wallet {
+class Player{
   constructor() {
-    super(50);
     this.playerBet = null;
-    this.playerCash = this.cash;
+    this.playerWallet = new Wallet();
     this.currentCards = [];
     this.playerPoints = null;
     this.boxOnePoints = null;
@@ -75,12 +74,12 @@ class Player extends Wallet {
   }
   
   get getPlayerCash() {
-    return this.playerCash;
+    return this.playerWallet.cash;
   }
 
   set setPlayerBet(currentBet) {
     this.playerBet = currentBet;
-    this.playerCash -= currentBet;
+    this.playerWallet.cash -= currentBet;
   }
 }
 

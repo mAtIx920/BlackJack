@@ -9,7 +9,7 @@ class Game extends UI {
   constructor() {
     super();
     this.buttons = new Buttons(this.hitAction, this.doubleAction, this.standAction, this.splitAction, this.insuranceAction)
-    modal.playerCashSpan.textContent = player.getPlayerCash;//Display player primary player cash on the screen
+    setTimeout(() => modal.playerCashSpan.textContent = player.getPlayerCash, 400);//Display player primary player cash on the screen
     this.dealerCards = [];
     this.dealerPoints = null;
     this.points = null;
@@ -38,7 +38,7 @@ class Game extends UI {
     modal.betInput.value = '';
     this.#textError = false;
 
-    if(!bet || bet < 0) {
+    if(!bet || bet < 1) {
       this.createElement('.text', 'p', 'Please, type correct amount', 'error');
       this.#textError = true;
       return
@@ -347,6 +347,7 @@ class Game extends UI {
 
   insuranceAction = () => {
     this.#useInsurance = true;
+    this.buttons.removeListeners();
 
     player.playerCash -= (player.playerBet / 2);//Using double mode costs half primary player bet, here it is takes form him
 
@@ -358,7 +359,10 @@ class Game extends UI {
     this.buttons.insuranceButton.removeEventListener('click', this.insuranceAction);
     this.buttons.insuranceButton.classList.add('usedButton');
 
-    setTimeout(() => this.changeScreen(modal.messageModal, this.serviceScreenType.HIDDEN), 2000);
+    setTimeout(() => {
+      this.changeScreen(modal.messageModal, this.serviceScreenType.HIDDEN);
+      this.buttons.addListenersOnButton();
+    }, 2000);
   }
 
   splitAction = () => {
@@ -435,7 +439,7 @@ class Game extends UI {
     
     //Checking if dealer first card is AS card, if it is true, then player could use insurance mode
     if(dealerCards[0].nameCard === 'a') {
-      this.button.textContent = `INSURANCE - ${player.playerBet / 2}zł`;//Displaying price of insurance mode
+      this.buttons.insuranceButton.textContent = `INSURANCE - ${player.playerBet / 2}zł`;//Displaying price of insurance mode
       this.getElement(this.selectors.extendContener).appendChild(this.buttons.insuranceButton);//Added insurance button mode to DOM
     }
 
@@ -505,7 +509,9 @@ class Game extends UI {
 
         this.revealCards();
 
-        cashToSend += player.playerCash;
+        cashToSend += player.playerWallet.cash;
+        
+        player.playerWallet.sendMoneyToDB(cashToSend);
         
       }, 3000);
     }
