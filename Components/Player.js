@@ -72,6 +72,21 @@ class Player{
       }
     }
   }
+
+  removeItem = (splitValue) => {
+    this.playerBet = null;
+    
+    if(splitValue) {
+      this.boxOne = [];
+      this.boxTwo = [];
+      this.boxOnePoints = null;
+      this.boxTwoPoints = null;
+
+      return;
+    }
+
+    this.currentCards = [];
+  }
   
   get getPlayerCash() {
     return this.playerWallet.cash;
@@ -80,6 +95,10 @@ class Player{
   set setPlayerBet(currentBet) {
     this.playerBet = currentBet;
     this.playerWallet.cash -= currentBet;
+  }
+
+  set setPlayerCash(newCash) {
+    this.playerWallet.cash = newCash;
   }
 }
 

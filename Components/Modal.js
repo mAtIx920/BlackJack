@@ -17,6 +17,7 @@ class Modal extends UI {
     //Message modal displays at the end game
     this.endModal = this.getElement(this.selectors.endModal);
     this.headerElement = this.getElement(this.selectors.endHeader);
+    this.playAgainButton = this.getElement(this.selectors.againButton);
   }
 }
 

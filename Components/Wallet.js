@@ -1,7 +1,7 @@
 export class Wallet {
   constructor() {
-    this.cash = null;
-    this.getMoneyFromDB()
+    this.cash = 0;
+    this.getMoneyFromDB();
   }
 
   getMoneyFromDB = async () => {

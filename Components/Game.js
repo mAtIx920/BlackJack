@@ -8,7 +8,6 @@ import { message} from "./Message.js";
 class Game extends UI {
   constructor() {
     super();
-    this.buttons = new Buttons(this.hitAction, this.doubleAction, this.standAction, this.splitAction, this.insuranceAction)
     setTimeout(() => modal.playerCashSpan.textContent = player.getPlayerCash, 400);//Display player primary player cash on the screen
     this.dealerCards = [];
     this.dealerPoints = null;
@@ -28,7 +27,8 @@ class Game extends UI {
 
   //Adding listener event on modal start and end game buttons
   addListenersModalButtons = () => {
-    modal.betButton.addEventListener('click', (e) => this.startGame());
+    modal.betButton.addEventListener('click', () => this.startGame());
+    modal.playAgainButton.addEventListener('click', () => this.playAgain());
   }
 
   startGame = () => {
@@ -50,6 +50,7 @@ class Game extends UI {
       return    
     }
   
+    this.buttons = new Buttons(this.hitAction, this.doubleAction, this.standAction, this.splitAction, this.insuranceAction)
     this.giveFirstCardsPlayer();
 
     player.setPlayerBet = bet;
@@ -510,6 +511,7 @@ class Game extends UI {
         this.revealCards();
 
         cashToSend += player.playerWallet.cash;
+        player.setPlayerCash = cashToSend;
         
         player.playerWallet.sendMoneyToDB(cashToSend);
         
@@ -517,6 +519,41 @@ class Game extends UI {
     }
   }
 
+  playAgain = () => {
+    this.removeElementsFromDOM(this.playerCardsElement);
+    this.removeElementsFromDOM(this.dealerCardsElement);
+    this.removeElementsFromDOM(this.getElement(this.selectors.gameBetInfo));
+    this.removeElementsFromDOM(this.getElement(this.selectors.playerPoints));
+    this.removeElementsFromDOM(this.getElement(this.selectors.dealerPoints));
+    this.removeElementsFromDOM(this.getElement(this.selectors.multiplier));
+    this.removeElementsFromDOM(this.getElement(this.selectors.hitContener));
+    this.removeElementsFromDOM(this.getElement(this.selectors.extendContener));
+    this.removeElementsFromDOM(this.getElement(this.selectors.standContener));
+
+    player.removeItem(this.#useSplit);
+
+    this.#multiplier = 100;
+    this.#playerWon = 0;
+    this.#useSplit = 0;
+    this.#textError = false;
+    this.#isfinishedGame = false;
+    this.#useDouble = false;
+    this.#useInsurance = false;
+    this.points = null;
+    this.dealerCards = [];
+
+    modal.playerCashSpan.textContent = player.getPlayerCash;
+
+    this.changeScreen(modal.endModal, this.serviceScreenType.HIDDEN);
+    this.changeScreen(modal.betModal, this.serviceScreenType.VISIBLED);
+  }
+
+  //Remove cards from DOM elements
+  removeElementsFromDOM = parentSelector => {
+    while(parentSelector.firstChild) {
+      parentSelector.removeChild(parentSelector.lastChild)
+    }
+  }
   //Function which adds css class which turns all cards
   revealCards = () => {
     const cards = document.querySelectorAll('.table div div.card');

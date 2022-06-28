@@ -9,7 +9,6 @@ export class Buttons extends UI {
     this.splitAction = split;
     this.insuranceAction = insurance;
     this.initButtons();
-    // this.addListenersOnButton();
   }
 
   initButtons = () => {

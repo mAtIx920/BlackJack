@@ -32,11 +32,6 @@ export class UI {
     textInfo: '[data-textInfo]',
     againButton: '[data-playAgain]',
     backButton: '[data-back]',
-    //Two boxes with points elements
-    // firstBoxElement: '.boxOne__points',
-    // secondBoxElement: '.boxTwo__points',
-    // firstBoxPoints: '[data-boxOnePoints]',
-    // secondBoxPoints: '[data-boxTwoPoints]'
   }
 
   //Function allowing get DOM elements to js
